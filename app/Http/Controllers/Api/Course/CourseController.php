@@ -77,7 +77,7 @@ class CourseController extends Controller
         //
     }
     public function getCoursesByName($name){
-return response()->json(        Course::where('title','like',"%$name%")->get());
+return response()->json(        Course::where('name','like',"%$name%")->get());
     }
 
     /**
@@ -101,6 +101,6 @@ return response()->json(        Course::where('title','like',"%$name%")->get());
 //
 //    }
 public function getTopRated($limit){
-        return response()->json(Course::join('courses_rate','courses_rate.courseId','=','courses.id')->select('courses.*',DB::raw('avg(courses_rate.rate) as avrageRate'))->groupBy('courses.id')->orderBy('avrageRate','desc')->limit($limit)->get());
+        return response()->json(Course::join('courses_rate','courses_rate.course_id','=','courses.id')->select('courses.*',DB::raw('avg(courses_rate.rate) as avrageRate'),DB::raw('count(courses_rate.course_id) as count'))->groupBy('courses.id')->orderBy('avrageRate','desc')->orderBy('count','desc')->limit($limit)->get());
 }
 }

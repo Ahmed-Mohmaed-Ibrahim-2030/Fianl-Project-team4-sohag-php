@@ -20,7 +20,7 @@ class CategoryController extends Controller
     }
 
     public function getSubCategories( $Category){
-        
+
         return response()->json(Category::find($Category)->subcategory,200);
 
     }
