@@ -19,8 +19,9 @@ class CategoryController extends Controller
         return response()->json(Category::all(),200);
     }
 
-    public function getSubCategories(Category $category){
-        return response()->json($category->subcategory,200);
+    public function getSubCategories( $Category){
+        
+        return response()->json(Category::find($Category)->subcategory,200);
 
     }
     /**
