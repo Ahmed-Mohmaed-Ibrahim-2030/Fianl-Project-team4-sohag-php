@@ -5,6 +5,10 @@
 @section('owner')
     Admins
     @endsection
+<?php
+$models=['users','categories','subCategories','courses'];
+$maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update','edit'],'danger'=>['delete','']];
+?>
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
@@ -16,17 +20,17 @@
             </div>
         @endforeach
 
-    <form method="post" action="{{route('admins.store')}}">
+    <form method="post" action="{{route('admins.store')}}" enctype="multipart/form-data">
       {{  csrf_field()}}
       {{  method_field('post')}}
         <div class="card-body">
             <div class="form-group">
                 <label for="exampleInputEmail1">First Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="" value="{{old('name')}}">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="" value="{{old('first_name')}}">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Last Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" placeholder="" value="{{old('name')}}">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" placeholder="" value="{{old('last_name')}}">
             </div>
 
             <div class="form-group">
@@ -81,36 +85,30 @@
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-user" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Admins</a>
-                            </li>
-
+                            @foreach($models as $index=>$model)
+                                <li class="nav-item">
+                                    <a class="nav-link {{$index==0?"active":""}}" id="custom-tabs-four-{{$model}}-tab" data-toggle="pill" href="#custom-tabs-four-{{$model}}" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">{{$model}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
+
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-four-user" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                                <div class="form-group row cols-4 align-items-center ">
-                                    <div class="form-check ">
-                                        <input id="read_users"  name="permissions[]" value="users-read" class="form-check-input" type="checkbox">
-                                        <label for="read_users" class="form-check-label btn btn-sm mr-5 btn-outline-info"><i class="fa fa-book"></i> Read  </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input id="create_user" name="permissions[]" value="users-create" class="form-check-input" type="checkbox">
-                                        <label for="create_user"  class="form-check-label btn btn-sm mr-5 btn-outline-primary"><i class="fa fa-plus"></i> Add</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input id="update_user" name="permissions[]" value="users-update" class="form-check-input" type="checkbox">
-                                        <label for="update_user" class="form-check-label btn btn-sm mr-5 btn-outline-warning" ><i class="fa fa-edit"></i>  Update</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input id="delete_user" name="permissions[]" value="users-delete" class="form-check-input" type="checkbox">
-                                        <label for="delete_user" class="form-check-label btn btn-sm mr-5 btn-outline-danger"><i class="fa fa-remove"></i>Delete</label>
-                                    </div>
+                            @foreach($models as $index=>$model)
+                                <div class="tab-pane fade show {{$index==0?"active":""}}" id="custom-tabs-four-{{$model}}" role="tabpanel" aria-labelledby="custom-tabs-four-{{$model}}-tab">
+                                    <div class="form-group row cols-4 align-items-center ">
+                                        @foreach($maps as $index=>$map)
+                                            <div class="form-check ">
+                                                <input id="{{$map[0]}}_{{$model}}"  name="permissions[]" value="{{$model}}-{{$map[0]}}"  class="form-check-input"   type="checkbox">
+                                                <label for="{{$map[0]}}_{{$model}}" class="form-check-label btn btn-sm mr-5 btn-outline-{{$index}}"><i class="fa fa-{{$map[1]}}"></i>
+                                                    {{$map[0]}}  </label>
+                                            </div>
 
-                            </div>
-                            </div>
-
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- /.card -->

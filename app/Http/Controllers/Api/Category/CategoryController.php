@@ -20,7 +20,7 @@ class CategoryController extends Controller
     }
 
     public function getSubCategories(Category $category){
-        return response()->json($category->subCategories,200);
+        return response()->json($category->subcategory,200);
 
     }
     /**
