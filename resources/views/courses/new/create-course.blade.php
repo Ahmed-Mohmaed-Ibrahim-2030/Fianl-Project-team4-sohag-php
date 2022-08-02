@@ -6,11 +6,11 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Create course</h3>
                 </div>
-                
+
                 <form role="form" method="POST" action="{{ route('course.store') }}">
                     {{csrf_field()}}
                     <div class="box-body">
-                       
+
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>course name*</label>
@@ -33,7 +33,7 @@
                                 </div>
                             <div class="form-group">
                             <label for="course">Select category course</label>
-                         
+
                             <select class="form-control" id="category_id" name="category_id" >
                             <option value="" selected disabled hidden>Choose here</option>
                             @php
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="course">Select subcategory course</label>
-                         
+
                             <select class="form-control" id="sub_category_id" name="sub_category_id" >
                             <option value="" selected disabled hidden>Choose here</option>
                             @php
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label for="course">Select Instructor course</label>
-                         
+
                             <select class="form-control" id="instructor_id" name="instructor_id" >
                             <option value="" selected disabled hidden>Choose here</option>
                             @php
@@ -70,20 +70,21 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="course">accepted by</label>
-                         
-                            <select class="form-control" id="accepted-by" name="accepted-by" >
-                            <option value="" selected disabled hidden>Choose here</option>
-                            @php
-                                $admins = \App\Models\Admin::all();
-                            @endphp
-                                @foreach ($admins as $admin)
-                                    <option value="{{ $admin->id }}">{{ $admin->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                         
+
+{{--                        <div class="form-group">--}}
+{{--                            <label for="course">accepted by</label>--}}
+
+{{--                            <select class="form-control" id="accepted-by" name="accepted-by" >--}}
+{{--                            <option value="" selected disabled hidden>Choose here</option>--}}
+{{--                            @php--}}
+{{--                                $admins = \App\Models\Admin::all();--}}
+{{--                            @endphp--}}
+{{--                                @foreach ($admins as $admin)--}}
+{{--                                    <option value="{{ $admin->id }}">{{ $admin->name }}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+
 
                         </div>
                     </div>

@@ -30,11 +30,13 @@ class courseController extends Controller
     {
 
         if(request()->has("subCatID")){
-            $cources = Course::where("sub_category_id",request()->get("subCatID"))->get();
+            $cources = Course::where("sub_category_id",request()->get("subCatID"))->where('reviewed',true)->get();
         return view('courses.new.cources', ['cources' => $cources]);
 
         }
-        $cources = Course::all();
+//            dd($cources);
+        $cources = Course::where('reviewed',true)->get();
+//        dd($cources);
 
 
 
@@ -74,7 +76,7 @@ class courseController extends Controller
                 'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
                 'category_id'=>'required',
                 'sub_category_id'=>'required',
-                'accepted_by'=>'required'
+//                'accepted_by'=>'required'
 
             ]
         );

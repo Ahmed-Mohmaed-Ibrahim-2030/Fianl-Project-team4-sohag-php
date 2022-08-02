@@ -30,9 +30,10 @@ return new class extends Migration
             $table->integer('videosCount')->nullable(true);
             $table->string('image')->nullable(true);
             // $table->foreignId('instructor_id')->constrained('instructors');
-            $table->unsignedBigInteger('accepted_by');
-            $table->boolean('reviewed')->default(false);
-            $table->foreign('accepted_by')->references('id')->on('admins');
+//            $table->unsignedBigInteger('accepted_by')->nullable(true);
+            $table->boolean('reviewed')->default(0);
+            $table->foreignId('accepted_by')->nullable()->constrained('admins','id');
+//            $table->foreign('accepted_by')->references('id')->on('admins');
 //            $table->foreignId('sub_category_id')->constrained('sub_categories');
             $table->timestamps();
 

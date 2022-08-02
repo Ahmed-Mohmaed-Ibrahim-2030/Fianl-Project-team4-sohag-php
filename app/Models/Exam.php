@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Exam extends Model
 {
     use HasFactory;
-    protected $table="exam";
-    protected $fillable=[
-        'exam_id',
-        'announce_date',
-        'start_date',
-        'hours',
-        'mark',
-        'course_id'
-    ];
+    protected $fillable = ['exam_date', 'exam_title'];
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
 }

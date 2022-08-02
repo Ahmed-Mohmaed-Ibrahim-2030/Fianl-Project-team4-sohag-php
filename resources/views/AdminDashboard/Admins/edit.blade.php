@@ -1,6 +1,6 @@
 @extends('layouts.AdminDashboard')
 @section('title')
-    Update User
+    Update Admin
 @endsection
 @section('owner')
     Users
@@ -12,7 +12,7 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Update User</h3>
+            <h3 class="card-title">Update Admin</h3>
         </div>
         @foreach($errors->all() as $error)
             <div class="alert mt-2 alert-danger">

@@ -74,7 +74,7 @@ public function createSubCategory(Category $category){
 
         $request->validate( [
             'name'=>'required|min:3',
-            'slug'=>'required|min:5',
+            'slug'=>'required|min:5|unique:categories',
             'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
 //        $image = $request->image;
@@ -154,7 +154,7 @@ public function createSubCategory(Category $category){
         //
         $request->validate( [
             'name'=>'min:3',
-            'slug'=>'min:5',
+            'slug'=>'required|min:5|unique:categories,slug,'.$Category->id,
             'image' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
         $request_data=$request->except('image');

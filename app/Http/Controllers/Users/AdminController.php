@@ -105,9 +105,13 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Admin $admin)
     {
-        //
+
+
+    $user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
+//dd($user);
+        return view('AdminDashboard.Admins.edit',compact('user'));
     }
 
     /**
@@ -117,17 +121,16 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Admin $admin)
     {
-        //
 
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
 //
-            'email' => [ 'string', 'email', 'max:255',  'unique:users,email,'.$user->id],
+            'email' => [ 'string', 'email', 'max:255',  'unique:users,email,'.$admin->id],
 
-            'phone' => ['string', 'max:11','unique:users,phone,'.$user->id],
+            'phone' => ['string', 'max:11','unique:users,phone,'.$admin->id],
 
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -140,8 +143,8 @@ class AdminController extends Controller
             $request_data['image']=$imageName;
 
         }
+$user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
 
-//dd($request_data);
         $user->update(
             $request_data
         );
@@ -150,7 +153,7 @@ class AdminController extends Controller
             'phone'=>$request->phone,
         ]);
         $user->syncPermissions($request->permissions);
-        return redirect()->route('users.edit',$user->id);
+        return redirect()->route('admins.edit',$admin->id);
     }
 
     /**

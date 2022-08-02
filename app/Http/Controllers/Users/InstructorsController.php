@@ -56,7 +56,7 @@ class InstructorsController extends Controller
             'username' => ['required', 'string',  'max:255', 'unique:users'],
             'scientific_degree'=>['required', 'string'],
             'description' => ['required', 'string'],
-            'phone' => ['required', 'string', 'min:11', 'max:11', 'unique:admins'],
+            'phone' => ['required', 'string', 'min:11', 'max:11', 'unique:instructors'],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

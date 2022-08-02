@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 require __DIR__.'/CategoryApi.php';
-// <<<<<<< HEAD
+require __DIR__.'/exam.php';
+
 //Route::get('parents','App\Http\Controllers\Api\Parent\ParentController@parents');
 //Route::get('getParent/{id}','App\Http\Controllers\Api\Parent\ParentController@parentByID');
 //Route::post('newParent','App\Http\Controllers\Api\Parent\ParentController@create');
@@ -67,9 +68,7 @@ require __DIR__.'/CategoryApi.php';
 //Route::post('/instructors_supports',[InstructorsSupportController::class,'store']);
 //Route::post('/instructors_support/{id}',[InstructorsSupportController::class,'update']);
 //Route::post('/instructors_supports/{id}',[InstructorsSupportController::class,'destroy']);
-// =======
-////
-// >>>>>>> origin/Ahmed_Elnemr
+
 
 //Route::get('/instructors_supports',[InstructorsSupportController::class,'index']);
 //Route::get('/instructors_support/{id}',[InstructorsSupportController::class,'show']);
