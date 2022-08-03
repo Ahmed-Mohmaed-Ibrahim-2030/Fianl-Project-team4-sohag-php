@@ -105,19 +105,19 @@
                             <p>Add Category </p>
                         </a>
                     </li>
-
+                        @if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin'))
+                            <li class="nav-item">
+                                <a href="{{route('UnreviewedCourses')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> unViewed </p>
+                                </a>
+                            </li>
+                        @endif
+                    @endif
                 </ul>
             </li>
                     @endif
 
-                <li class="nav-item">
-                    <a href="{{route('UnreviewedCourses')}}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>un viewed </p>
-                    </a>
-                </li>
-
-            @endif
                   </ul>
     </nav>
     <!-- /.sidebar-menu -->

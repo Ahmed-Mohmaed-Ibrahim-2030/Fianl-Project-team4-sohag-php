@@ -84,7 +84,7 @@ class courseController extends Controller
 $request_data=$request->except('image' ,"_token");
         if($request->hasFile('image')){
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('assets/dist/img/SubCategory-images/'), $imageName);
+            $request->image->move(public_path('assets/dist/img/Course-images/'), $imageName);
 
             $request_data['image']=$imageName;
 
@@ -143,7 +143,7 @@ public function getUnreviewedCourse(){
     $courses = Course::where('reviewed',false)->get();
 //        dd($cources);
 
-    return view('courses.unReviewed', compact('courses'));
+    return view('AdminDashboard.Categories.SubCategories.Courses.unReviewed', compact('courses'));
 }
 public function review(Course $course){
 Admin_Course::create([    'admin_id'=>Auth::user()->admin->id,

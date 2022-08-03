@@ -48,7 +48,7 @@
                             <label for="course">Select subcategory course</label>
 
                             <select class="form-control" id="sub_category_id" name="sub_category_id" >
-                            <option value="" selected disabled hidden>Choose here</option>
+
                             @php
                                 $SubCategories = \App\Models\Sub_Category::all();
                             @endphp
@@ -61,12 +61,12 @@
                             <label for="course">Select Instructor course</label>
 
                             <select class="form-control" id="instructor_id" name="instructor_id" >
-                            <option value="" selected disabled hidden>Choose here</option>
+
                             @php
                                 $Instructors = \App\Models\Instructor::all();
                             @endphp
                                 @foreach ($Instructors as $Instructor)
-                                    <option value="{{ $Instructor->id }}">{{ $Instructor->first_name }}</option>
+                                    <option value="{{ $Instructor->id }}" >{{ $Instructor->first_name }}</option>
                                 @endforeach
                             </select>
                         </div>

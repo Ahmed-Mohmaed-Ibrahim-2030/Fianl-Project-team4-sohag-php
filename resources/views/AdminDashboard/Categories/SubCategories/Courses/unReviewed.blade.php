@@ -1,7 +1,7 @@
 @extends('layouts.adminDashboard')
 
 @section('title')
-List Users
+List UnReviewed Courses
     @endsection
 @section('owner')
     Admins
@@ -32,13 +32,15 @@ List Users
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @if($courses->count()>0 or !Auth::user()->hasRole('admin'))
+            @if($courses->count()>0 &&(Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin')))
             <table class="table table-hover text-nowrap ">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
                     <th>Name</th>
-                    <th>Eamil</th>
+                    <th>description</th>
+                    <th>image</th>
+                    <td>review</td>
                     <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
@@ -49,15 +51,17 @@ List Users
                     <td>{{$i+1}}</td>
                     <td>{{$course->name }}</td>
                     <td>{{$course->small_desc}}</td>
+                    <td><img src="{{asset('assets/dist/img/Course-images/'.$course->image)}} " style="height:50px;width:50px" ></td>
+                    <td><a class="btn btn-outline-info" href="{{route("course.video.show",$course->id)}}">review</a></td>
 
                     <td>
-<a href="{{route('review',$course->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('courses-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Edit</a>
+<a href="{{route('review',$course->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('courses-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Active</a>
 <form method="post" action="{{route('courses.destroy',['course'=>$course])}}" id="delete-form" style="display:inline-block">
 {{--<form method="post" action="{{route('admins.index')}}" >--}}
     {{csrf_field()}}
     {{method_field('delete')}}
 
-                        <button type="submit"  class="btn btn-outline-danger delete " {{Auth::user()->hasPermission('course-delete')?'':'disabled'}}><i class="fa fa-trash"></i> Delete</button>
+                        <button type="submit"  class="btn btn-outline-danger delete " {{Auth::user()->hasPermission('courses-delete')?'':'disabled'}}><i class="fa fa-trash"></i> Delete</button>
 </form>
                     </td>
                 </tr>
@@ -65,8 +69,8 @@ List Users
                 </tbody>
             </table>
             @else
-                <h2>
-                    No Users Founded
+                <h2 class="alert alert-success">
+                  all courses are reviewed
                 </h2>
             @endif
         </div>
