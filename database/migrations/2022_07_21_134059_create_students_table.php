@@ -24,9 +24,8 @@ return new class extends Migration
             $table->date('birth_date')->nullable(true);
 
             $table->unsignedBigInteger('account_id')->unique();
-//            $table->unsignedBigInteger('parent_id')->unique();
+
             $table->foreign('account_id')->references('id')->on('users');
-//            $table->foreign('parent_id')->references('id')->on('parents');
 
         });
     }

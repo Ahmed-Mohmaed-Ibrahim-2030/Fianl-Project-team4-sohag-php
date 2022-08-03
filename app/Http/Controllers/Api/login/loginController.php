@@ -37,7 +37,6 @@ return [
                     'email' => 'required|email|unique:users,email',
                     'password' => 'required'
                 ]);
-
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
@@ -45,7 +44,6 @@ return [
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -53,22 +51,22 @@ return [
 
                 'username' => $request->username,
 
-                'password' => bcrypt($request->password)
+                'password' => bcrypt($request->password),
+                'role'=>'student'
             ]);
-            $user->attachRole('student');
-            $student=Student::create([
+            Student::create([
                 'phone'=>$request->phone,
                 'address'=>$request->address,
                 'account_id'=>$user->id,
             ]);
-
+            $user->attachRole('student');
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
-        } catch (\Throwable $th) {
+            } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage()
