@@ -33,7 +33,13 @@ return [
             'exams'=>'c,r,u,d',
             'courses' => 'c,r,u',
         ],
-        'student'=>[],
+        'student'=>[
+            'profile' => 'r',
+            'categories'=>'r',
+            'subcategories'=>'r',
+            'exams'=>'c,',
+            'courses' => 'c',
+        ],
         'parent'=>[],
 
         'administrator' => [

@@ -43,7 +43,7 @@
                             </div>
                            <div class="form-group">
                                     <label>course price*</label>
-                                    <input type="number" name="price" min="1"  class="form-control" placeholder="course name" value="{{old('price')}}" required />
+                                    <input type="number" name="price" min="1"  class="form-control" placeholder="price" value="{{old('price')}}" required />
                                 </div>
                             </div>
 
@@ -85,8 +85,7 @@
                                 $SubCategories = \App\Models\Sub_Category::all();
                             @endphp
                                 @foreach ($SubCategories as $subCategorie)
-                                    <option value="{{ $subCategorie->id }}" {{old(
-                                'sub_category_id')==$subCategorie->id?"selected":""}}>{{ $subCategorie->name }}</option>
+                                    <option value="{{$subCategorie->id}}" {{old('sub_category_id')==$subCategorie->id?"selected":""}}>{{ $subCategorie->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -104,20 +103,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="course">accepted by</label>
 
-                            <select class="form-control" id="accepted_by" name="accepted_by" >
-                            <option value="" selected disabled hidden>Choose here</option>
-                            @php
-                                $admins = \App\Models\Admin::all();
-                            @endphp
-                                @foreach ($admins as $admin)
-                                    <option value="{{ $admin->id }}" {{old(
-                                'accepted_by')==$admin->id?"selected":""}}>{{ \App\Models\User::find($admin->account_id)->first_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
 
                 </div>

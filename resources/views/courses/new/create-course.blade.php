@@ -16,12 +16,12 @@
                                     <label>course name*</label>
                                     <input type="text" name="name" class="form-control" placeholder="course name" value="{{old('name')}}" required />
                                 </div>
-                            </div>
+
                            <div class="form-group">
                                     <label>course price*</label>
                                     <input type="number" name="price" class="form-control" placeholder="course name" value="{{old('name')}}" required />
                                 </div>
-                            </div>
+
 
                             <div class="form-group">
                                     <label>course short description*</label>
@@ -71,25 +71,12 @@
                             </select>
                         </div>
 
-{{--                        <div class="form-group">--}}
-{{--                            <label for="course">accepted by</label>--}}
 
-{{--                            <select class="form-control" id="accepted-by" name="accepted-by" >--}}
-{{--                            <option value="" selected disabled hidden>Choose here</option>--}}
-{{--                            @php--}}
-{{--                                $admins = \App\Models\Admin::all();--}}
-{{--                            @endphp--}}
-{{--                                @foreach ($admins as $admin)--}}
-{{--                                    <option value="{{ $admin->id }}">{{ $admin->name }}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-
-
-                        </div>
+</div>
                     </div>
+
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Create </button>
 
                     </div>
                 </form>

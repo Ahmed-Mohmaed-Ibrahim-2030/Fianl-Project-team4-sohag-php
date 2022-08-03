@@ -9,14 +9,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
-namespace App\Http\Controllers;
 
-
+use App\Models\Admin_Course;
 use App\Models\Course;
 
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class courseController extends Controller
@@ -55,7 +55,7 @@ class courseController extends Controller
 
         return view('AdminDashboard.Categories.SubCategories.Courses.create-course');
 
-        return view('courses.new.create-course',);
+
 
     }
 
@@ -76,7 +76,7 @@ class courseController extends Controller
                 'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
                 'category_id'=>'required',
                 'sub_category_id'=>'required',
-//                'accepted_by'=>'required'
+//
 
             ]
         );
@@ -139,4 +139,19 @@ $request_data=$request->except('image' ,"_token");
     {
         //
     }
+public function getUnreviewedCourse(){
+    $courses = Course::where('reviewed',false)->get();
+//        dd($cources);
+
+    return view('courses.unReviewed', compact('courses'));
+}
+public function review(Course $course){
+Admin_Course::create([    'admin_id'=>Auth::user()->admin->id,
+    'course_id'=>$course->id
+    ]);
+$course->update([
+    'reviewed'=>true
+]);
+return redirect()->route('UnreviewedCourses');
+}
 }

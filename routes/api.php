@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 require __DIR__.'/CategoryApi.php';
 require __DIR__.'/exam.php';
+require __DIR__.'/authApi.php';
 
 //Route::get('parents','App\Http\Controllers\Api\Parent\ParentController@parents');
 //Route::get('getParent/{id}','App\Http\Controllers\Api\Parent\ParentController@parentByID');

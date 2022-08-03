@@ -19,7 +19,7 @@ class Course extends Model
          'sub_category_id',
          'instructor_id',
          'reviewed',
-         'accepted_by'
+
      ];
      public function sub_category()
      {
