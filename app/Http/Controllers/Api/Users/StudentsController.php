@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 
@@ -16,8 +17,8 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $users=Student::join('students','users.id','=','students.account_id')->select('*')->get();
-        dd($users);
+        $users=Student::join('users','users.id','=','students.account_id')->select('*')->get();
+//        dd($users);
         return response()->json([
             'status' => true,
             'message' => ' Successfully',
@@ -54,9 +55,18 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
         //
+        $users=$student->join('users','users.id','=','students.account_id')->select('*')->first();
+//        dd($users);
+        return response()->json([
+            'status' => true,
+            'message' => ' Successfully',
+            'data'=>$users
+
+        ], 200);
+
     }
 
     /**
