@@ -55,7 +55,7 @@ class loginController extends Controller
             ], 500);
         }
     }
-    
+
     public function registration(Request $request){
 
         try {

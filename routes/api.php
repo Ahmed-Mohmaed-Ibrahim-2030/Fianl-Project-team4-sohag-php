@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Category\SubCategoryController;
 use App\Http\Controllers\Api\Course\CourseController;
+use App\Http\Controllers\Api\EnrollContoller;
 use App\Http\Controllers\Api\Users\StudentsController;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -99,3 +100,8 @@ require __DIR__.'/authApi.php';
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'update']);
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'destroy']);
 Route::resource('students',StudentsController::class)->middleware('auth:sanctum');
+Route::resource('courseStudent',EnrollContoller::class)->middleware('auth:sanctum');
+//get all students enrolled in course
+Route::get('getAllStudentsOnCourse/{course}',[EnrollContoller::class,'students_en_course'])->middleware('auth:sanctum');
+//get all courses are enrolled in  by  student
+Route::get('getAllCoursesOnStudent/{student}',[EnrollContoller::class,'courses_en_students'])->middleware('auth:sanctum');

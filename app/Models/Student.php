@@ -27,7 +27,8 @@ class Student extends Model
 
     protected $guarded=['id'];
 public function courses(){
-    $this->belongeToMany('App\Course');
+//    $this->belongeToMany('App\Course');
+    return $this->hasMany(courseStudent::class,'student_id');
 }
 //     protected $table="students";
 //     protected $fillable=[

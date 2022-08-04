@@ -39,5 +39,8 @@ class Course extends Model
        public function avrageRate(){
          return $this->hasMany(Course_Rate::class,'courseId')->avg('rate')->get();
      }
+  public function students(){
+         return $this->hasMany(courseStudent::class,'course_id');
+     }
 
 }
