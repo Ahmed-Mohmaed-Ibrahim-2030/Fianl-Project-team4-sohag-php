@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 //use Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Passport\RefreshToken;
+use Laravel\Passport\Token;
 
 class loginController extends Controller
 {
@@ -73,4 +75,19 @@ return [
             ], 500);
         }
     }
+    public function logout(Request $request){
+
+
+            if (Auth::check()) {
+                Auth::user()->tokens()->delete();
+            }
+            return response()->json([
+
+                'status'    => 1,
+                'message'   => 'User Logout',
+
+            ], 200);
+        }
+
+
 }
