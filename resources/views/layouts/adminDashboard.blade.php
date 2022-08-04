@@ -26,6 +26,10 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('assets\plugins\summernote\summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    
+
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -38,6 +42,7 @@
     <!-- Navbar -->
 
        @include('components.AdminComponents.navbar')
+
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -50,7 +55,7 @@
 
     <div class="content-wrapper">
         <div class="content-header">
-            <div class="container-fluid">
+            <div id="owner" class="container-fluid ">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">@yield('owner')</h1>

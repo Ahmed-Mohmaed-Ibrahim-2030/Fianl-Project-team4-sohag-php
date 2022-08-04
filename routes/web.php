@@ -60,6 +60,7 @@ Route::resource('category', App\Http\Controllers\categoryController::class);
 
 
 require __DIR__.'/auth.php';
+//require __DIR__.'/notifications.php';
 
 
 //Route::controller(AdminsController::class)->group(function () {

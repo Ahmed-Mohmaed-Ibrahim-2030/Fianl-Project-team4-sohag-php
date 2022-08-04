@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Category\SubCategoryController;
 use App\Http\Controllers\Api\Course\CourseController;
+use App\Http\Controllers\Api\Users\StudentsController;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -97,3 +98,4 @@ require __DIR__.'/authApi.php';
 //Route::post('/offers',[App\Http\Controllers\Api\Course\offerController::class,'store']);
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'update']);
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'destroy']);
+Route::resource('students',StudentsController::class)->middleware('auth:sanctum');

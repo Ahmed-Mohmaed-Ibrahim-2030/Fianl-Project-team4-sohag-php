@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav id="mainNav" class="main-header navbar navbar-expand navbar-white navbar-light ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -133,18 +133,18 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
-        <li class="nav-item dropdown row align-items-center justify-ev ">
+        <li class="nav-item dropdown  align-items-center justify-ev ">
 
-        <a class="nav-link col-10 " data-toggle="dropdown" href="#">
+        <a class="nav-link  " data-toggle="dropdown" href="#">
             {{--                <i class="far fa-bell"></i>--}}
             {{--                <span class="badge badge-warning navbar-badge">15</span>--}}
             {{Auth::user()->first_name .' '.Auth::user()->last_name}}
 
+            <img src="{{Auth::user()->image?asset('assets/dist/img/user-images/'.Auth::user()->image):asset('assets/dist/img/avatar5.png')}}" style="width: 30px;height:30px; max-height:100%" class="img-circle elevation-2 " alt="User Image">
         </a>
-<div class="col-2 ">
+{{--<div class="col-2 ">--}}
 
-            <img src="{{Auth::user()->image?asset('assets/dist/img/user-images/'.Auth::user()->image):asset('assets/dist/img/avatar5.png')}}" style="width: 30px;height:30px" class="img-circle elevation-2 " alt="User Image">
-</div>
+{{--</div>--}}
 
 
 

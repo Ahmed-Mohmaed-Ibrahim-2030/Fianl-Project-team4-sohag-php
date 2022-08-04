@@ -76,7 +76,7 @@ class InstructorsController extends Controller
                 'last_name'=>$request->first_name,
                 'email'=>$request->email,
                 'username'=>$request->username,
-                'image'=>$imageName,
+                'image'=>$imageName??"",
                 'password'=>bcrypt($request->password),
                 'role'=>'instructor'
             ]
