@@ -57,8 +57,9 @@ class StudentsController extends Controller
      */
     public function show(Student $student)
     {
+//        dd($student);
         //
-        $users=$student->join('users','users.id','=','students.account_id')->select('*')->first();
+        $users=$student->join('users','users.id','=','students.account_id')->where('students.id',$student->id)->select('users.*','students.*')->first();
 //        dd($users);
         return response()->json([
             'status' => true,
