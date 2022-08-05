@@ -14,6 +14,7 @@ use App\Models\Admin_Course;
 use App\Models\Course;
 
 
+use App\Models\Sub_Category;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -30,17 +31,17 @@ class courseController extends Controller
     {
 
         if(request()->has("subCatID")){
-            $cources = Course::where("sub_category_id",request()->get("subCatID"))->where('reviewed',true)->get();
-        return view('courses.new.cources', ['cources' => $cources]);
+            $courses = Course::where("sub_category_id",request()->get("subCatID"))->where('reviewed',true)->get();
+        return view('courses.new.cources', ['courses' => $courses]);
 
         }
 //            dd($cources);
-        $cources = Course::where('reviewed',true)->get();
+        $courses = Course::where('reviewed',true)->get();
 //        dd($cources);
 
 
 
-        return view('courses.new.cources', ['cources' => $cources]);
+        return view('courses.new.courses', ['courses' => $courses]);
     }
 
     /**
@@ -58,7 +59,10 @@ class courseController extends Controller
 
 
     }
-
+public function getCourseBySubCategoryId(Sub_Category $subcategory){
+    $courses=$subcategory->courses()->where('reviewed',true)->get();
+    return view('courses.new.courses', ['courses' => $courses]);
+}
     /**
      * Store a newly created resource in storage.
      *

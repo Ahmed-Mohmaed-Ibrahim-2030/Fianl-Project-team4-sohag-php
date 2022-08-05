@@ -38,6 +38,7 @@ List SubCategories
 <div class="row row-cols-lg-4 justify-between g-2 row cols-md-2">
     @foreach($subCategories as $subCategory)
         <div class="col">
+            <a href="{{route('getCourseBySubCategoryId',$subCategory->id)}}">
             <div class="card mb-2 bg-gradient-dark">
                 <img class="card-img-top" src="{{asset('assets/dist/img/SubCategory-images/'.$subCategory->image)}}" style="height:200px" alt="Dist Photo 1">
                 <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -52,6 +53,7 @@ List SubCategories
                     </form>
                 </div>
             </div>
+            </a>
         </div>
 
 

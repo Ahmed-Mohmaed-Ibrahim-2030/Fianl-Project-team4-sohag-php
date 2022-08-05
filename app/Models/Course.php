@@ -14,7 +14,7 @@ class Course extends Model
          'name',
          'price',
          'small_desc',
-            'description',
+        'description',
          'image',
          'sub_category_id',
          'instructor_id',
@@ -41,6 +41,10 @@ class Course extends Model
      }
   public function students(){
          return $this->hasMany(courseStudent::class,'course_id');
+     }
+     public function courseContent(){
+         return $this->hasMany(courseContent::class,'course_id');
+
      }
 
 }

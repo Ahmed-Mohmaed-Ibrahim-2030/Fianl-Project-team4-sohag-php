@@ -10,6 +10,7 @@ class Course_Rate extends Model
     use HasFactory;
     protected $table='courses_rate';
     protected $fillable=[
+        'student_id',
         'rate',
         'comment',
 'course_id'

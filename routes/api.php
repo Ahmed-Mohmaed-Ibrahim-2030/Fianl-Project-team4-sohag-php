@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Category\CategoryController;
 use App\Http\Controllers\Api\Category\SubCategoryController;
 use App\Http\Controllers\Api\Course\CourseController;
 use App\Http\Controllers\Api\EnrollContoller;
+use App\Http\Controllers\Api\FeedbacksConroller;
 use App\Http\Controllers\Api\Users\StudentsController;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -105,3 +106,4 @@ Route::resource('courseStudent',EnrollContoller::class)->middleware('auth:sanctu
 Route::get('getAllStudentsOnCourse/{course}',[EnrollContoller::class,'students_en_course'])->middleware('auth:sanctum');
 //get all courses are enrolled in  by  student
 Route::get('getAllCoursesOnStudent/{student}',[EnrollContoller::class,'courses_en_students'])->middleware('auth:sanctum');
+Route::resource('courseRate',FeedbacksConroller::class)->middleware('auth:sanctum');

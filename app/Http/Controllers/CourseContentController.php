@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\courseContent;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CourseContentController extends Controller
      */
     public function index()
     {
-        $content= courseContent::all();
+        $content= courseContent::paginate(1);
         return $content;
     }
 
@@ -23,13 +24,13 @@ class CourseContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create(Course $course)
 
 
     {
 
-        error_log($id);
-        return view('courses.new.addvideo',["id" => $id]);
+        error_log($course);
+        return view('courses.new.addvideo',compact('course'));
 
     }
 
@@ -56,10 +57,10 @@ class CourseContentController extends Controller
      * @param  \App\Models\courseContent  $courseContent
      * @return \Illuminate\Http\Response
      */
-    public function show( $id)
+    public function show( Course $course)
     {
-        $cource = courseContent::where('course_id', $id)->get();
-        return view("courses.new.cources_videos",["courses"=>$cource]);
+        $courses =$course->courseContent()->paginate(1);
+        return view("courses.new.cources_videos",["courses"=>$courses,'course'=>$course]);
     }
 
     /**

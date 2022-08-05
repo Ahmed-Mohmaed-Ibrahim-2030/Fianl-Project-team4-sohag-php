@@ -118,8 +118,8 @@ Route::controller(InstructorsSupportController::class)->group(function () {
 Route::get('/courses', [courseController::class, 'index'])->name("allcourses")->middleware('auth');
 Route::get('/courses/create', [courseController::class, 'create'])->name("create.course")->middleware('auth');
 Route::post('/courses/store', [courseController::class, 'store'])->name("course.store")->middleware('auth');
-Route::get('/courses/video/create/{id}', [CourseContentController::class, 'create'])->name("course.video.create")->middleware('auth');
-Route::get('/courses/video/show/{id}', [CourseContentController::class, 'show'])->name("course.video.show")->middleware('auth');
+Route::get('/courses/video/create/{course}', [CourseContentController::class, 'create'])->name("course.video.create")->middleware('auth');
+Route::get('/courses/video/show/{course}', [CourseContentController::class, 'show'])->name("course.video.show")->middleware('auth');
 Route::post('/courses/video/store', [CourseContentController::class, 'store'])->name("course.video.store");
 Route::get('/courses/category', [CategoryController::class, 'index'])->name("allCategories");
 Route::get('/courses/category/create', [CategoryController::class, 'create'])->name("create.category");

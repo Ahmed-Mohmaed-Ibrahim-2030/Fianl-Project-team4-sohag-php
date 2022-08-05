@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeedbacksRequest;
 use App\Models\Course;
+use App\Models\Course_Rate;
 use App\Models\courseStudent;
-use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-class EnrollContoller extends Controller
+class FeedbacksConroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,53 +32,48 @@ class EnrollContoller extends Controller
         //
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeedbacksRequest $request)
     {
 //        dd($request->all());
-if(Course::find($request->course_id)->count() > 0 && Auth::user()->hasRole('student'))
+// $validated = $request->validated();
+// dd($validated);
+        if(Course::find($request->course_id)->count() > 0 && Auth::user()->hasRole('student'))
         {
             $id = Auth::user()->student->id;
-            courseStudent::create(["student_id" => $id, 'course_id' => $request->course_id, "mark" => 0, "status" => "enrolled"]);
+
+
+            Course_Rate::create([
+                'student_id' => $id,
+                'course_id' => $request->course_id,
+                "rate" => $request->rate,
+                "comment" => $request->comment
+                ]
+            );
             return response()->json([
                 'status' => true,
-                'message' => 'student enrolled successfully ',
+                'message' => 'course rated successfully ',
             ], 201);
         }
-else if(Course::find($request->course_id)->count() > 0)
-{
-    return response()->json([
-        'status' => false,
-        'message' => 'invalid course_id ',
-    ], 301);
-}
-else
-{
-    return response()->json([
-        'status' => false,
-        'message' => 'you are not a student',
-    ], 301);
-    }
-    }
-    public function students_en_course(Course $course){
-        return response()->json([
-            'status' => true,
-            'message' => ' successfully ',
-            'data'=>$course->students()->join('students','students.id','=','courses_student.student_id')->join('users','users.id','=','students.account_id')->select('students.*','users.*')->get()
-        ], 201);
-    }
-   public function courses_en_students(Student $student){
-        return response()->json([
-            'status' => true,
-            'message' => ' successfully ',
-            'data'=>$student->courses()->join('courses','courses.id','=','courses_student.course_id')->select('courses.*')->get()
-        ], 201);
+        else if(Course::find($request->course_id)->count() > 0)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'invalid course_id ',
+            ], 301);
+        }
+        else
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'you are not a student',
+            ], 301);
+        }
     }
 
     /**

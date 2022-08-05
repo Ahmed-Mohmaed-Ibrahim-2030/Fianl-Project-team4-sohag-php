@@ -25,7 +25,7 @@ List UnReviewed Courses
     <div class="card">
         <div class="card card-dark">
             <div class="card-header">
-                <h3 class="card-title">List all Admins</h3>
+                <h3 class="card-title">List  UnReviewed Courses</h3>
             </div>
 
             <!-- /.card-body -->
@@ -40,7 +40,9 @@ List UnReviewed Courses
                     <th>Name</th>
                     <th>description</th>
                     <th>image</th>
-                    <td>review</td>
+
+                    <th>Review</th>
+                    <th>Add Content</th>
                     <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
@@ -53,9 +55,10 @@ List UnReviewed Courses
                     <td>{{$course->small_desc}}</td>
                     <td><img src="{{asset('assets/dist/img/Course-images/'.$course->image)}} " style="height:50px;width:50px" ></td>
                     <td><a class="btn btn-outline-info" href="{{route("course.video.show",$course->id)}}">review</a></td>
+                    <td> <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary {{Auth::user()->hasPermission('courses-update')?'':'disabled'}}" ><i class="fa fa-plus"></i> add Video </a></td>
 
                     <td>
-<a href="{{route('review',$course->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('courses-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Active</a>
+<a href="{{route('review',$course->id)}}" class="btn btn-outline-warning {{Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin')?'':'disabled'}} " ><i class="fa fa-edit"></i> Active</a>
 <form method="post" action="{{route('courses.destroy',['course'=>$course])}}" id="delete-form" style="display:inline-block">
 {{--<form method="post" action="{{route('admins.index')}}" >--}}
     {{csrf_field()}}
