@@ -46,7 +46,7 @@ class loginController extends Controller
                 'status' => true,
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken,
-                
+
                 'data'=> $user->join('students','users.id','=','students.account_id')->where('users.email',$request->email)->first()
             ], 200);
 
