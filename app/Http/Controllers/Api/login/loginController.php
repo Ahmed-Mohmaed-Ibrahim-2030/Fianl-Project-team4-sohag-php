@@ -45,7 +45,8 @@ class loginController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'data'=> $user->join('students','users.id','=','students.account_id')->where('users.email',$request->email)->select('users.*','students.*')->first()
             ], 200);
 
         } catch (\Throwable $th) {
