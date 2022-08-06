@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class StudentsController extends Controller
@@ -102,5 +103,35 @@ class StudentsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function addImage(Request $request){
+$request->validate([
+    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+]);
+        if($request->hasFile('image')){
+            $imageName = time().'.'.$request->image->extension();
+//            $removedPhotoPath = public_path("assets/dist/img/user-images/{$user->image}");
+//            \App\Http\Services\Media::delete($removedPhotoPath);
+            $request->image->move(public_path('assets/dist/img/user-images/'), $imageName);
+//            $request_data['image']=$imageName;
+Auth::user()->update([
+    'image'=>$imageName
+]);
+            return response()->json([
+                'status' => true,
+                'message' => 'image added  Successfully',
+
+            ], 201);
+
+        }
+        else {
+            return response()->json([
+                'status' => false,
+                'message' => 'please send valid image',
+
+            ], 301);
+        }
+
+
     }
 }

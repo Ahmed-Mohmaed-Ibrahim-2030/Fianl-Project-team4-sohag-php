@@ -101,6 +101,7 @@ require __DIR__.'/authApi.php';
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'update']);
 //Route::post('/offer/{id}',[App\Http\Controllers\Api\Course\offerController::class,'destroy']);
 Route::resource('students',StudentsController::class)->middleware('auth:sanctum');
+Route::post('students/addImage',[StudentsController::class,'addImage'])->middleware('auth:sanctum');
 Route::resource('courseStudent',EnrollContoller::class)->middleware('auth:sanctum');
 //get all students enrolled in course
 Route::get('getAllStudentsOnCourse/{course}',[EnrollContoller::class,'students_en_course'])->middleware('auth:sanctum');

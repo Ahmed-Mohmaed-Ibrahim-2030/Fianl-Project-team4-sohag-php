@@ -10,8 +10,8 @@
 <div class="">
 
     <?php
-//    $user=Illuminate\Support\Facades\Auth::user();
-   $user =App\Http\Controllers\Users\UserController::userInfo();
+   $user=Illuminate\Support\Facades\Auth::user();
+   //$//user =App\Http\Controllers\Users\UserController::userInfo();
 //dd($user);
     ?>
     <!-- Widget: user widget style 1 -->
@@ -22,6 +22,7 @@
             <h5 class="widget-user-desc">{{$user->role}}</h5>
         </div>
         <div class="widget-user-image">
+
             <img class="img-circle elevation-2" src="{{$user->image?asset('assets/dist/img/user-images/'.$user->image):asset('assets/dist/img/avatar5.png')}}">
         </div>
         <div class="card-footer">
