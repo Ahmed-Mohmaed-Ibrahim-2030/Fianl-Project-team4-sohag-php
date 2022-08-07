@@ -18,7 +18,7 @@ class CourseController extends Controller
     public function index()
     {
         //
-        $courses =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->get();
+        $courses =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->where('courses.reviewed',true)->get();
         return response()->json($courses);
     }
 
@@ -52,7 +52,7 @@ class CourseController extends Controller
     public function show($id)
     {
         //
-        $course =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->where('courses.id',$id)->first();
+        $course =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->where('courses.id',$id)->where('courses.reviewed',true)->first();
      //   return response()->json(Course::find($id));
         return response()->json($course);
     }
