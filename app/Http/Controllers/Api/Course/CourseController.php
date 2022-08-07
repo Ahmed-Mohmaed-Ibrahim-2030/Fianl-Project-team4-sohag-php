@@ -18,7 +18,8 @@ class CourseController extends Controller
     public function index()
     {
         //
-        return response()->json(Course::get());
+        $courses =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->get();
+        return response()->json($courses);
     }
 
     /**
@@ -51,7 +52,9 @@ class CourseController extends Controller
     public function show($id)
     {
         //
-        return response()->json(Course::find($id));
+        $course =Course::join('instructors','instructors.id','courses.instructor_id')->join('users','users.id','instructors.account_id')->select('courses.*','users.first_name as instructor_first_name','users.last_name as instructor_last_name')->where('courses.id',$id)->first();
+     //   return response()->json(Course::find($id));
+        return response()->json($course);
     }
 
     /**
