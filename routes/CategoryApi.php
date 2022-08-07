@@ -24,3 +24,7 @@ Route::get('getRates/{course_id}', [CourseController::class,'avrageRate']);
 Route::get('feedbacks/{course_id}', [CourseController::class,'feedbacks']);
 // get limit top rated courses
 Route::get('getTopRated/{limit}', [CourseController::class,'getTopRated']);
+// to get all content  by course id
+Route::get('courseContent/{course}',[App\Http\Controllers\Api\Course\CoursesContentController::class,'index'])->middleware('auth:sanctum');
+//to get specific content by course id and content id 
+Route::get('courseContent/{course}/{id}',[App\Http\Controllers\Api\Course\CoursesContentController::class,'show'])->middleware('auth:sanctum');

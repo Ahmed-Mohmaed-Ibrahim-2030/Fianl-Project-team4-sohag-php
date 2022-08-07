@@ -72,7 +72,7 @@ class courseContentController extends Controller
             return $this->ApiResponseCrCont(null , 'course content not found' , 404);
         }
         $coureCont->delete($id);
-        if($coureCont) {  
+        if($coureCont) {
             return $this->ApiResponseCrCont(null ,'course content deleted', 200);
         }
 
