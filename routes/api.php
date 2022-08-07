@@ -115,3 +115,4 @@ Route::get('getAllStudentsOnCourse/{course}',[EnrollContoller::class,'students_e
 //get all courses are enrolled in  by  student
 Route::get('getAllCoursesOnStudent/{student}',[EnrollContoller::class,'courses_en_students'])->middleware('auth:sanctum');
 Route::resource('courseRate',FeedbacksConroller::class)->middleware('auth:sanctum');
+Route::get('/courseStudent',[ App\Http\Controllers\Api\Users\parentStudentController::class,'index'])->middleware('auth:sanctum');

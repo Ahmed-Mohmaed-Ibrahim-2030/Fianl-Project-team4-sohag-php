@@ -135,9 +135,16 @@ class InstructorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Instructor $instructor)
     {
         //
+        $instructors=User::join('instructors','users.id','instructors.account_id')->where('instructors.id',$instructor->id)->get();
+        return response()->json([
+            'status' =>true,
+            'data'=>$instructors
+        ],200);
+
+
     }
 
     /**
