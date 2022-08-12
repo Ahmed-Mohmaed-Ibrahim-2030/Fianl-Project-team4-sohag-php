@@ -144,3 +144,5 @@ Route::resource('StudentExam',\App\Http\Controllers\StudentExamController::class
 //Route::get('stripe', [StripePaymentController::class,'stripe']);
 //Route::post('stripe', [StripePaymentController::class,'stripePost'])->name('stripe.post');
 
+Route::resource('exams',App\Http\Controllers\ExamController::class)->middleware('auth');
+Route::post('questionsCount',[\App\Http\Controllers\ExamController::class,'questionsCount'])->name('questionsCount');

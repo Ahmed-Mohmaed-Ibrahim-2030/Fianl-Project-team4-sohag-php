@@ -191,7 +191,7 @@ $request_data['image']=$imageName;
 
         if($Category->subcategory()->count() > 0)
         {
-            return redirect()->back();
+            return back()->with('warning','can not delete this cat because it has childs !');
         }
         else{
             $Category->delete();

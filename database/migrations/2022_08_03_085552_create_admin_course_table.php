@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('admin_course', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('admins','id');
-            $table->foreignId('course_id')->constrained('courses','id');
+            $table->foreignId('admin_id')->constrained('admins','id') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('course_id')->constrained('courses','id') ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->timestamps();
         });
     }

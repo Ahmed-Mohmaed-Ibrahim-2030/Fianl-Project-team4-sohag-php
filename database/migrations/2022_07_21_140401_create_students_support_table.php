@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('support');
 
-            $table->foreignId('admin_id')->constrained('admins');
-            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('admin_id')->constrained('admins') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('student_id')->constrained('students') ->onUpdate('cascade')
+                ->onDelete('cascade');;
 
 
 

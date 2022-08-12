@@ -41,7 +41,7 @@ class courseController extends Controller
 
 
 
-        return view('courses.new.courses', ['courses' => $courses]);
+        return view('AdminDashboard.Categories.SubCategories.Courses.courses', ['courses' => $courses]);
     }
 
     /**
@@ -61,7 +61,7 @@ class courseController extends Controller
     }
 public function getCourseBySubCategoryId(Sub_Category $subcategory){
     $courses=$subcategory->courses()->where('reviewed',true)->get();
-    return view('courses.new.courses', ['courses' => $courses]);
+    return view('AdminDashboard.Categories.SubCategories.Courses.courses', ['courses' => $courses]);
 }
     /**
      * Store a newly created resource in storage.
@@ -139,9 +139,17 @@ $request_data=$request->except('image' ,"_token");
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
         //
+        if($course->students()->count()){
+            return back()->with('warning','there are students enroll in this course !');
+        }
+        else{
+         $course->courseContent()->delete();
+            $course->delete();
+            return back()->with('success','deleted successfully !');
+        }
     }
 public function getUnreviewedCourse(){
     $courses = Course::where('reviewed',false)->get();

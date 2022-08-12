@@ -18,9 +18,17 @@ class ParentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users =User::where('role','like','%admin%')->join('parents','users.id','=','parents.account_id')->get();
+//        $users =User::where('role','like','%admin%')->join('parents','users.id','=','parents.account_id')->get();
+//        return view('AdminDashboard.Parents.index',compact('users'));
+        $users =User::whereRoleIs('parent')->where(function($query) use ($request){
+            return $query->when($request->search,function($q)use ($request){
+                return $q->where('first_name','like','%'.$request->search.'%')->orWhere('last_name','like','%'.$request->search.'%');
+            });
+        })->join('parents','users.id','=','parents.account_id')->paginate(4);
+
+
         return view('AdminDashboard.Parents.index',compact('users'));
     }
 

@@ -19,9 +19,11 @@ return new class extends Migration
             $table->double('mark');
             $table->enum('status',['enrolled','finish']);
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses') ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students') ->onUpdate('cascade')
+                ->onDelete('cascade');;
         });
     }
 

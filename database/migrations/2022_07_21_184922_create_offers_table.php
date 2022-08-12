@@ -22,8 +22,10 @@ return new class extends Migration
             $table->dateTime('announce_date');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->foreignId('course_id')->constrained('courses');
-            $table->foreignId('admin_id')->constrained('admins');
+            $table->foreignId('course_id')->constrained('courses') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('admin_id')->constrained('admins') ->onUpdate('cascade')
+                ->onDelete('cascade');;
         });
     }
 

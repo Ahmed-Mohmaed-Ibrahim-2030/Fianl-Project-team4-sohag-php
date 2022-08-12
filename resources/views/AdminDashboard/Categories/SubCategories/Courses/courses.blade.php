@@ -64,11 +64,21 @@
           <img src="{{asset('assets/dist/img/Course-images/'.$course->image)}}" class="card-img-top" alt="...">
       </a>
       <div class="card-body">
-          <a class="btn btn-outline-warning border-none" href="{{ route('course.video.show',$course)}}">
+          <a class="nav-link" href="{{ route('course.video.show',$course)}}">
           <h5 class="card-title">{{$course->name}}</h5>
+
           </a>
+       <form method="post" action="{{ route('courses.destroy',$course->id)}}" class="text-center">
+           {{csrf_field()}}
+           {{method_field('delete')}}
           <p class="card-text">{{$course->description}}</p>
-          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> add Content </a>
+
+
+
+          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>
+          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>
+          <button type="submit"  class="btn btn-outline-danger delete w-75 mx-auto "><i class="fa fa-trash"></i> delete </button>
+       </form>
       </div>
     </div>
             </div>
@@ -80,7 +90,7 @@
 
         @else
             <h3 class="alert alert-warning mx-2">
-                Now Videos Added Yet
+                Now Courses Added Yet
             </h3>
     @endif
 @endsection

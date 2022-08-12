@@ -7,16 +7,16 @@ List Users
     Users
     @endsection
 @section('content')
-    <form method="post" action="">
+    <form method="get" action="parents">
         <div class="form-group">
             <div class="row ">
                 <div class="col-md-4">
-                    <input type="search" class="form-control" placeholder="Search">
+                    <input type="search" class="form-control" placeholder="Search" name="search" value="{{request()->search}}">
                 </div>
                 <div class="col-md-4">
 
                     <button type="submit" class="btn btn-primary  {{Auth::user()->hasPermission('users-read')?'':'disabled'}}"><i class="fa fa-search"></i> Find</button>
-                    <a href="{{route('users.create')}}" class="btn btn-primary  {{Auth::user()->hasPermission('users-create')?'':'disabled'}}"><i class="fa fa-plus"></i> Add</a>
+
                 </div>
             </div>
         </div>
@@ -37,26 +37,28 @@ List Users
                 <tr>
                     <th style="width: 10px">#</th>
                     <th>Role</th>
-                    <th>Eamil</th>
-                    <th style="width: 40px">Action</th>
+                    <th>Full Name</th>
+                    {{--
+                    <th style="width: 40px">Action</th>--}}
+                    }
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($users as $i=>$user)
      <tr>
                     <td>{{$i+1}}</td>
-                    <td>{{$user->name}}</td>
+                    <td>{{$user->first_name .' '. $user->last_name}}</td>
                     <td>{{$user->email}}</td>
 
                     <td>
-<a href="{{route('users.edit',['user'=>$user->id])}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " >Edit</a>
-<form method="post" action="{{route('users.destroy',['user'=>$user])}}" style="display:inline-block">
+{{--<a href="{{route('parents.edit',['user'=>$user->id])}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " >Edit</a>
+<form method="post" action="{{route('parents.destroy',['user'=>$user])}}" style="display:inline-block">
     {{csrf_field()}}
     {{method_field('delete')}}
 
                         <button type="submit"  class="btn btn-outline-danger " {{Auth::user()->hasPermission('users-delete')?'':'disabled'}}>Delete</button>
 </form>
-                    </td>
+                    </td>--}}
                 </tr>
 @endforeach
                 </tbody>

@@ -18,15 +18,22 @@ class ExamController extends Controller
         $exam =Exam::all();
         return view('exam.index',compact('exam'));
     }
+public function questionsCount(Request $request){
 
+
+}
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        if ($request->qnumber)
+        return view('AdminDashboard.Exams.create',['qnumber' => $request->qnumber]);
+        else
+        return view('AdminDashboard.Exams.create');
     }
 
     /**

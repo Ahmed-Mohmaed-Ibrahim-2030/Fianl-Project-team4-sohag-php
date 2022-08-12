@@ -19,8 +19,10 @@ return new class extends Migration
 
             // $table->unsignedBigInteger('certification_id');
             $table->double('degree');
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('exam_id')->constrained('exam');
+            $table->foreignId('student_id')->constrained('students') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('exam_id')->constrained('exam') ->onUpdate('cascade')
+                ->onDelete('cascade');;
 
 
         });

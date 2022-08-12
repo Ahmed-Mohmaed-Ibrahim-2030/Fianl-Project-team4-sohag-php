@@ -22,7 +22,8 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->double('hours');
             $table->double('mark');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('course_id')->constrained('courses') ->onUpdate('cascade')
+                ->onDelete('cascade');;
         });
     }
 

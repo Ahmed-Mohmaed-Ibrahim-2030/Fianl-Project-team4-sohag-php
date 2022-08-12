@@ -19,9 +19,9 @@ class AdminController extends Controller
         //$users =User::whereRoleIs('admin')->join('admins','users.id','=','admins.account_id')->get();
         $users =User::whereRoleIs('admin')->where(function($query) use ($request){
             return $query->when($request->search,function($q)use ($request){
-                return $q->where('name','like','%'.$request->search.'%');
+                return $q->where('first_name','like','%'.$request->search.'%')->orWhere('last_name','like','%'.$request->search.'%');
             });
-        })->join('admins','users.id','=','admins.account_id')->get();
+        })->join('admins','users.id','=','admins.account_id')->paginate(4);
 
 
         return view('AdminDashboard.Admins.index',compact('users'));

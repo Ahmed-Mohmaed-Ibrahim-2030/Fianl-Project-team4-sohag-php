@@ -30,7 +30,7 @@ class CourseContentController extends Controller
     {
 
         error_log($course);
-        return view('courses.new.addvideo',compact('course'));
+        return view('AdminDashboard.Categories.SubCategories.Courses.addvideo',compact('course'));
 
     }
 
@@ -60,7 +60,7 @@ class CourseContentController extends Controller
     public function show( Course $course)
     {
         $courses =$course->courseContent()->paginate(1);
-        return view("courses.new.cources_videos",["courses"=>$courses,'course'=>$course]);
+        return view("AdminDashboard.Categories.SubCategories.Courses.cources_videos",["courses"=>$courses,'course'=>$course]);
     }
 
     /**

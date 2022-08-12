@@ -18,7 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('content_type');
             $table->string('source');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('course_id')->constrained('courses') ->onUpdate('cascade')
+                ->onDelete('cascade');;
         });
     }
 

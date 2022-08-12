@@ -19,7 +19,8 @@ return new class extends Migration
             // $table->unsignedBigInteger('exam_content_id');
             $table->string('question_source');
             $table->string('exam_type');
-            $table->foreignId('exam_id')->constrained('exam');
+            $table->foreignId('exam_id')->constrained('exam') ->onUpdate('cascade')
+                ->onDelete('cascade');;
 
         });
     }

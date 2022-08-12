@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('support');
             $table->unsignedBigInteger('instructor_id');
- 
-            $table->foreign('instructor_id')->references('id')->on('instructors');
+
+            $table->foreign('instructor_id')->references('id')->on('instructors') ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->unsignedBigInteger('admin_id');
- 
+
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
         });

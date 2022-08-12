@@ -32,7 +32,7 @@ List UnReviewed Courses
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @if($courses->count()>0 &&(Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin')))
+            @if($courses->count()>0 &&(Auth::user()->hasPermission('courses-read')))
             <table class="table table-hover text-nowrap ">
                 <thead>
                 <tr>
@@ -55,7 +55,7 @@ List UnReviewed Courses
                     <td>{{$course->small_desc}}</td>
                     <td><img src="{{asset('assets/dist/img/Course-images/'.$course->image)}} " style="height:50px;width:50px" ></td>
                     <td><a class="btn btn-outline-info" href="{{route("course.video.show",$course->id)}}">review</a></td>
-                    <td> <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary {{Auth::user()->hasPermission('courses-update')?'':'disabled'}}" ><i class="fa fa-plus"></i> add Video </a></td>
+                    <td> <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}}" ><i class="fa fa-plus"></i> add Video </a></td>
 
                     <td>
 <a href="{{route('review',$course->id)}}" class="btn btn-outline-warning {{Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin')?'':'disabled'}} " ><i class="fa fa-edit"></i> Active</a>

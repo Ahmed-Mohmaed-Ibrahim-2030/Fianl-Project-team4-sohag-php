@@ -18,9 +18,11 @@ return new class extends Migration
 
             $table->string('name');
             $table->unsignedBigInteger('sub_category_id');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories') ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->unsignedBigInteger('instructor_id');
-            $table->foreign('instructor_id')->references('id')->on('instructors');
+            $table->foreign('instructor_id')->references('id')->on('instructors') ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->string('small_desc');
             $table->text('description');
             $table->decimal('price');

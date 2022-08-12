@@ -37,7 +37,7 @@ List Users
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Name</th>
+                    <th>Full Name</th>
                     <th>Eamil</th>
                     <th style="width: 40px">Action</th>
                 </tr>
@@ -64,6 +64,7 @@ List Users
 @endforeach
                 </tbody>
             </table>
+                {!! $users->withQueryString()->links('pagination::bootstrap-5') !!}
             @else
                 <h2>
                     No Users Founded

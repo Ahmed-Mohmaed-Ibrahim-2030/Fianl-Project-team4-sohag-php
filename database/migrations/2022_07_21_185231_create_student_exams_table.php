@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamps();
 $table->enum('status',['pass','repeat']);
             $table->double('mark');
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('exam_id')->constrained('exam');
+            $table->foreignId('student_id')->constrained('students') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('exam_id')->constrained('exam') ->onUpdate('cascade')
+                ->onDelete('cascade');;
 
 
         });

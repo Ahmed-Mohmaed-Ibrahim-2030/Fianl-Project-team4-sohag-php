@@ -13,10 +13,15 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $users =User::where('role','like','%admin%')->join('students','users.id','=','students.account_id')->get();
+
+        $users =User::whereRoleIs('student')->where(function($query) use ($request){
+            return $query->when($request->search,function($q)use ($request){
+                return $q->where('first_name','like','%'.$request->search.'%')->orWhere('last_name','like','%'.$request->search.'%');
+            });
+        })->join('students','users.id','=','students.account_id')->paginate(4);
         return view('AdminDashboard.Students.index',compact('users'));
     }
 

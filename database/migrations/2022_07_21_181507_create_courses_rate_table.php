@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->tinyInteger('rate');
             $table->string('comment');
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('student_id')->constrained('students') ->onUpdate('cascade')
+                ->onDelete('cascade');;
+            $table->foreignId('course_id')->constrained('courses') ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

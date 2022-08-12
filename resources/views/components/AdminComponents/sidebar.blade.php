@@ -105,19 +105,41 @@
                             <p>Add Category </p>
                         </a>
                     </li>
-                        @if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin'))
-                            <li class="nav-item">
-                                <a href="{{route('UnreviewedCourses')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p> unViewed </p>
-                                </a>
-                            </li>
-                        @endif
-                    @endif
+
                 </ul>
             </li>
                     @endif
+            @if(Auth::user()->hasPermission('courses-read'))
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Courses
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
 
+                        <li class="nav-item">
+                            <a href="{{route('allcourses')}}" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list courses</p>
+                            </a>
+                        </li>
+
+
+                        @if(Auth::user()->hasPermission('courses-update'))
+                                <li class="nav-item">
+                                    <a href="{{route('UnreviewedCourses')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> unReviewed Courses </p>
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
+                    </ul>
+                </li>
+            @endif
                   </ul>
     </nav>
     <!-- /.sidebar-menu -->

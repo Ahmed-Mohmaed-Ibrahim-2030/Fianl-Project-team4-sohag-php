@@ -20,9 +20,9 @@ class InstructorsController extends Controller
         //$users =User::whereRoleIs('admin')->join('admins','users.id','=','admins.account_id')->get();
         $users =User::whereRoleIs('instructor')->where(function($query) use ($request){
             return $query->when($request->search,function($q)use ($request){
-                return $q->where('name','like','%'.$request->search.'%');
+                return $q->where('first_name','like','%'.$request->search.'%')->orWhere('last_name','like','%'.$request->search.'%');
             });
-        })->join('instructors','users.id','=','instructors.account_id')->get();
+        })->join('instructors','users.id','=','instructors.account_id')->paginate(4);
 
 
         return view('AdminDashboard.Instructors.index',compact('users'));

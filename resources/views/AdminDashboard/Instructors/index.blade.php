@@ -11,7 +11,7 @@ List Users
         <div class="form-group">
             <div class="row ">
                 <div class="col-md-4">
-                    <input type="search" class="form-control" placeholder="Search">
+                    <input type="search" class="form-control" name="search" placeholder="Search" value="{{request()->search}}">
                 </div>
                 <div class="col-md-4">
 
@@ -36,7 +36,7 @@ List Users
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Name</th>
+                    <th> Full Name</th>
                     <th>Eamil</th>
                     <th>Image</th>
                     <th style="width: 40px">Action</th>
@@ -65,6 +65,10 @@ List Users
 @endforeach
                 </tbody>
             </table>
+            <div class="by-2">
+                {!! $users->withQueryString()->links('pagination::bootstrap-5') !!}
+            </div>
+
             @else
                 <h2>
                     No Users Founded

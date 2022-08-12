@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets\plugins\summernote\summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-    
+
 
     </style>
 </head>
@@ -74,6 +74,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                @include('flash-message')
     @yield('content')
             </div>
         </section>
