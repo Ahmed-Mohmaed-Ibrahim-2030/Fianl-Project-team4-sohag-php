@@ -10,6 +10,7 @@ $models=['users','categories','subCategories','courses'];
 $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update','edit'],'danger'=>['delete','']];
 ?>
 @section('content')
+
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Update Admin</h3>
@@ -20,7 +21,7 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
             </div>
         @endforeach
 
-        <form method="post" action="{{route('admins.update',['admin'=>$user->id])}}"  enctype="multipart/form-data">
+        <form method="post" action="{{route('admins.update',['admin'=>$admin])}}"  enctype="multipart/form-data">
             {{  csrf_field()}}
             {{  method_field('put')}}
             <div class="card-body">
@@ -29,8 +30,8 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
                     <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" placeholder="" value="{{old('first_name')?old('first_name'):$user->first_name}}">
                 </div>
  <div class="form-group">
-                    <label for="exampleInputEmail1">Last Name</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" placeholder="" value="{{old('last_name')?old('last_name'):$user->last_name}}">
+                    <label for="">Last Name</label>
+                    <input type="text" class="form-control" id="" name="last_name" placeholder="" value="{{old('last_name')?old('last_name'):$user->last_name}}">
                 </div>
 
                 <div class="form-group">
@@ -60,7 +61,7 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="phone" value="{{old('phone')?old('phone'):$user->phone}}">
+                        <input type="text" class="form-control" name="phone" value="{{old('phone')?old('phone'):$admin->phone}}">
                     </div>
                     <!-- /.input group -->
                 </div>

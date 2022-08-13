@@ -109,9 +109,13 @@ class InstructorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Instructor $instructor)
     {
-        //
+        $user=$instructor->account;
+
+//    $user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
+//dd($user);
+        return view('AdminDashboard.Instructors.edit',['instructor'=>$instructor,'user'=>$user]);
     }
 
     /**
@@ -121,9 +125,60 @@ class InstructorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Instructor $instructor)
     {
         //
+        $user=$instructor->account;
+        $request->validate([
+//            'first_name' => ['required', 'string', 'max:255'],
+//            'last_name' => ['required', 'string', 'max:255'],
+////
+//            'email' => [ 'string', 'email', 'max:255',  'unique:users,email,'.$user->id],
+//
+//            'phone' => ['string', 'max:11','unique:admins,phone,'.$admin->id],
+//
+//            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'first_name' => ['string', 'max:255'],
+            'last_name' => [ 'string', 'max:255'],
+            'email' => [ 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+
+            'scientific_degree'=>[ 'string'],
+            'description' => [ 'string'],
+            'phone' => [ 'string', 'min:11', 'max:11','unique:instructors,phone,'.$instructor->id],
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+        $request_data=$request->only('first_name','last_name','email');
+        if($request->hasFile('image')){
+            $imageName = time().'.'.$request->image->extension();
+//            $removedPhotoPath = public_path("assets/dist/img/user-images/{$user->image}");
+//            \App\Http\Services\Media::delete($removedPhotoPath);
+            $request->image->move(public_path('assets/dist/img/user-images/'), $imageName);
+            $request_data['image']=$imageName;
+
+        }
+//$user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
+
+        $user->update(
+            $request_data
+        );
+//        Admin::where('account_id', $user->id)
+        $instructor ->update([
+
+            'phone'=>$request->phone,
+            'scientific_degree'=>$request->scientific_degree,
+            'description'=>$request->description
+        ]);
+        $user->syncPermissions($request->permissions);
+//        return redirect()->route('admins.edit',$admin->id);
+        if($user->wasChanged()||$instructor->wasChanged()){
+            return back()->with('success','upadated successfully');
+        }
+        else
+        {
+            return back()->with('info','no change');
+
+        }
     }
 
     /**
@@ -132,8 +187,12 @@ class InstructorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Instructor $instructor){
+//        dd($admin);
+        $user=$instructor->account;
+        $instructor->delete();
+//        User::find($admin)->delete();
+        $user->delete();
+        return back()->with('success','delete successfully  successfully');
     }
 }

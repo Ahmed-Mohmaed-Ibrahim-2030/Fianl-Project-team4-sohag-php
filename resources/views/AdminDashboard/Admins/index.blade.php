@@ -52,7 +52,7 @@ List Users
 
                     <td>
 <a href="{{route('admins.edit',$user->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Edit</a>
-<form method="post" action="{{route('admins.destroy',['admin'=>$user])}}" id="delete-form" style="display:inline-block">
+<form method="post" action="{{route('admins.destroy',['admin'=>$user->id])}}" id="delete-form" style="display:inline-block">
 {{--<form method="post" action="{{route('admins.index')}}" >--}}
     {{csrf_field()}}
     {{method_field('delete')}}
@@ -64,6 +64,7 @@ List Users
 @endforeach
                 </tbody>
             </table>
+{{--                        {{dd($user)}}--}}
                 {!! $users->withQueryString()->links('pagination::bootstrap-5') !!}
             @else
                 <h2>

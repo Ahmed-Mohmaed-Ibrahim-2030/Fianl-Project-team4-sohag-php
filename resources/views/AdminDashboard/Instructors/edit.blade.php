@@ -20,7 +20,7 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
             </div>
         @endforeach
 
-        <form method="post" action="{{route('admins.update',['admin'=>$user->id])}}"  enctype="multipart/form-data">
+        <form method="post" action="{{route('instructors.update',['instructor'=>$instructor->id])}}"  enctype="multipart/form-data">
             {{  csrf_field()}}
             {{  method_field('put')}}
             <div class="card-body">
@@ -60,7 +60,7 @@ $maps=['primary'=>['create','plus'],'info'=>['read','book'],'warning'=>['update'
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="phone" value="{{old('phone')?old('phone'):$user->phone}}">
+                        <input type="text" class="form-control" name="phone" value="{{old('phone')?old('phone'):$instructor->phone}}">
                     </div>
                     <!-- /.input group -->
                 </div>

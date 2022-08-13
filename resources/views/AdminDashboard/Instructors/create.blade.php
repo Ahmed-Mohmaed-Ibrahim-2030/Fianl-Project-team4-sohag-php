@@ -1,6 +1,6 @@
 @extends('layouts.AdminDashboard')
 @section('title')
-    new user
+    new Instructor
     @endsection
 @section('owner')
     Admins
@@ -8,7 +8,7 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">New Admin</h3>
+            <h3 class="card-title">New Instructor</h3>
         </div>
         @foreach($errors->all() as $error)
             <div class="alert mt-2 alert-danger">

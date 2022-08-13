@@ -14,9 +14,9 @@ class ExamApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+//dd($request->all());
         if (request()->has('course_id')) {
             $x = Exam::with("questions")->where('course_id', request('course_id'))->get();
         } else {

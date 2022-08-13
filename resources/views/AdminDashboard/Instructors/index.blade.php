@@ -53,8 +53,8 @@ List Users
     <img src="{{asset('assets\dist\img\User-images\\'.$user->image)}}" class="img-thumbnail " height="100" width="100" >
 </td>
                     <td>
-<a href="{{route('users.edit',['user'=>$user->id])}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " >Edit</a>
-<form method="post" action="{{route('users.destroy',['user'=>$user])}}" style="display:inline-block">
+<a href="{{route('instructors.edit',['instructor'=>$user->id])}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " >Edit</a>
+<form method="post" action="{{route('instructors.destroy',['instructor'=>$user->id])}}" style="display:inline-block">
     {{csrf_field()}}
     {{method_field('delete')}}
 
@@ -71,7 +71,7 @@ List Users
 
             @else
                 <h2>
-                    No Users Founded
+                    No Instructors Founded
                 </h2>
             @endif
         </div>

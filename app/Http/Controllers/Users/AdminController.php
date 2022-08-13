@@ -85,7 +85,7 @@ class AdminController extends Controller
         ]);
         $user->attachRole('admin');
         $user->syncPermissions($request->permissions);
-        return redirect()->route('users.index');
+        return redirect()->route('admins.index')->with('success','admin added successfully');
     }
 
     /**
@@ -107,11 +107,11 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
+$user=$admin->account;
 
-
-    $user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
+//    $user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
 //dd($user);
-        return view('AdminDashboard.Admins.edit',compact('user'));
+        return view('AdminDashboard.Admins.edit',['admin'=>$admin,'user'=>$user]);
     }
 
     /**
@@ -123,14 +123,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-
+//dd($admin);
+        $user=$admin->account;
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
 //
-            'email' => [ 'string', 'email', 'max:255',  'unique:users,email,'.$admin->id],
+            'email' => [ 'string', 'email', 'max:255',  'unique:users,email,'.$user->id],
 
-            'phone' => ['string', 'max:11','unique:users,phone,'.$admin->id],
+            'phone' => ['string', 'max:11','unique:admins,phone,'.$admin->id],
 
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -143,17 +144,26 @@ class AdminController extends Controller
             $request_data['image']=$imageName;
 
         }
-$user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
+//$user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id',$admin->id)->first();
 
         $user->update(
             $request_data
         );
-        Admin::where('account_id', $user->id)->update([
+//        Admin::where('account_id', $user->id)
+           $admin ->update([
 
             'phone'=>$request->phone,
         ]);
         $user->syncPermissions($request->permissions);
-        return redirect()->route('admins.edit',$admin->id);
+//        return redirect()->route('admins.edit',$admin->id);
+        if($user->wasChanged()||$admin->wasChanged()){
+            return back()->with('success','upadated successfully');
+        }
+        else
+        {
+            return back()->with('info','no change');
+
+        }
     }
 
     /**
@@ -184,7 +194,7 @@ $user=$admin->join('users','users.id','=','admins.account_id')->where('admins.id
         $admin->delete();
 //        User::find($admin)->delete();
         $user->delete();
-return  redirect()->route('admins.index');
+        return back()->with('success','delete successfully  successfully');
     }
 
 }
