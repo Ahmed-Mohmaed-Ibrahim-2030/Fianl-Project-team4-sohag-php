@@ -8,7 +8,7 @@ List Exams
 {{--    <small>{{$users->total()}}</small>--}}
     @endsection
 @section('content')
-    <form method="get" action="{{ 'admins' }}">
+    <form method="get" action="{{ 'exams' }}">
         <div class="form-group">
             <div class="row ">
                 <div class="col-md-4">
@@ -16,8 +16,8 @@ List Exams
                 </div>
                 <div class="col-md-4">
 
-                    <button type="submit" class="btn btn-outline-info btn-sm  {{Auth::user()->hasPermission('users-read')?'':'disabled'}}"><i class="fa fa-search"></i> Find</button>
-                    <a href="{{route('admins.create')}}" class="btn btn-outline-primary btn-sm  {{Auth::user()->hasPermission('users-create')?'':'disabled'}}"><i class="fa fa-plus"></i> Add</a>
+                    <button type="submit" class="btn btn-outline-info btn-sm  {{Auth::user()->hasPermission('courses-read')?'':'disabled'}}"><i class="fa fa-search"></i> Find</button>
+                    <a href="{{route('exams.create')}}" class="btn btn-outline-primary btn-sm  {{Auth::user()->hasRole('instructor')?'':'disabled'}}"><i class="fa fa-plus"></i> Add</a>
                 </div>
             </div>
         </div>
@@ -32,39 +32,50 @@ List Exams
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @if($users->count()>0)
+            @if($exams->count()>0)
             <table class="table table-hover text-nowrap ">
                 <thead>
                 <tr>
                     <th style="width: 10px">#</th>
-                    <th>Full Name</th>
-                    <th>Eamil</th>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>Course</th>
+                    <th>Add Questions</th>
                     <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $i=>$user)
+                @foreach($exams as $i=>$exam)
 {{--{{dd($user)}}--}}
-                <tr id="{{$user->id}}">
+                <tr id="{{$exam->id}}">
                     <td>{{$i+1}}</td>
-                    <td>{{$user->first_name .' '. $user->last_name}}</td>
-                    <td>{{$user->email}}</td>
+                    <td>{{$exam->exam_title }}</td>
+                    <td>{{$exam->exam_date}}</td>
+                    <td>{{\App\Models\Course::find($exam->course_id)->name}}</td>
+                    <td>
+                        <form method="get" action="{{route("exams.addQuestion",$exam)}}">
+                                            <input type="number" name="qnumber" min="1" class="form-control d-inline-block w-25">
+
+                                            <button type="submit" class="btn btn-primary"> <em class="fa fa-plus"></em>  </button>
+                                        </form>
+                    </td>
+
 
                     <td>
-<a href="{{route('admins.edit',$user->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('users-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Edit</a>
-<form method="post" action="{{route('admins.destroy',['admin'=>$user])}}" id="delete-form" style="display:inline-block">
+<a href="{{route('exams.edit',$exam->id)}}" class="btn btn-outline-warning {{Auth::user()->hasPermission('courses-update')?'':'disabled'}} " ><i class="fa fa-edit"></i> Edit</a>
+<form method="post" action="{{route('exams.destroy',['exam'=>$exam])}}" id="delete-form" style="display:inline-block">
 {{--<form method="post" action="{{route('admins.index')}}" >--}}
     {{csrf_field()}}
     {{method_field('delete')}}
 
-                        <button type="submit"  class="btn btn-outline-danger delete " {{Auth::user()->hasPermission('users-delete')?'':'disabled'}}><i class="fa fa-trash"></i> Delete</button>
+                        <button type="submit"  class="btn btn-outline-danger delete " {{Auth::user()->hasRole('instructor')?'':'disabled'}}><i class="fa fa-trash"></i> Delete</button>
 </form>
                     </td>
                 </tr>
 @endforeach
                 </tbody>
             </table>
-                {!! $users->withQueryString()->links('pagination::bootstrap-5') !!}
+                {!! $exams->withQueryString()->links('pagination::bootstrap-5') !!}
             @else
                 <h2>
                     No Users Founded

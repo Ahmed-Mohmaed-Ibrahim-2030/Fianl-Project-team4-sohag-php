@@ -75,8 +75,8 @@
 
 
 
-          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>
-          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>
+{{--          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id!=Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>--}}
+          <a href="{{ route('course.video.create',$course)}}" class="btn btn-outline-primary mb-2 w-75 mx-auto d-inline-block {{Auth::user()->hasRole('instructor')&&$course->instructor_id==Auth::user()->instructor->id?'':'disabled'}} "><i class="fa fa-plus"></i> add Content </a>
           <button type="submit"  class="btn btn-outline-danger delete w-75 mx-auto "><i class="fa fa-trash"></i> delete </button>
        </form>
       </div>

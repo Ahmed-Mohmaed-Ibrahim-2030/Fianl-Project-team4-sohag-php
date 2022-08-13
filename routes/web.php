@@ -145,4 +145,8 @@ Route::resource('StudentExam',\App\Http\Controllers\StudentExamController::class
 //Route::post('stripe', [StripePaymentController::class,'stripePost'])->name('stripe.post');
 
 Route::resource('exams',App\Http\Controllers\ExamController::class)->middleware('auth');
+Route::get('addQuestion/{exam}',[App\Http\Controllers\ExamController::class,'addQuestion'])->name('exams.addQuestion')->middleware('auth');
+Route::post('storeQuestion/{exam}',[App\Http\Controllers\ExamController::class,'storeQuestion'])->name('exams.storeQuestion')->middleware('auth');
+Route::delete('question/{exam}',[App\Http\Controllers\ExamController::class,'destroyQuestion'])->name('question.destroy')->middleware('auth');
+
 Route::post('questionsCount',[\App\Http\Controllers\ExamController::class,'questionsCount'])->name('questionsCount');

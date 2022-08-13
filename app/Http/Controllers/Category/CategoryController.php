@@ -195,7 +195,8 @@ $request_data['image']=$imageName;
         }
         else{
             $Category->delete();
+            return back()->with('succces','this cat  delete successfully !');
         }
-        return redirect()->back();
+//        return redirect()->back();
     }
 }

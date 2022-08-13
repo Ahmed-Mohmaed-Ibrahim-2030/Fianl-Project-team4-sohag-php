@@ -106,9 +106,10 @@
                         </a>
                     </li>
 
+                    @endif
                 </ul>
             </li>
-                    @endif
+            @endif
             @if(Auth::user()->hasPermission('courses-read'))
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
@@ -129,17 +130,48 @@
 
 
                         @if(Auth::user()->hasPermission('courses-update'))
-                                <li class="nav-item">
-                                    <a href="{{route('UnreviewedCourses')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> unReviewed Courses </p>
-                                    </a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a href="{{route('UnreviewedCourses')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> unReviewed Courses </p>
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </li>
-            @endif
+                        @endif
+            @if(Auth::user()->hasPermission('courses-read'))
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Exams
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{route('exams.index')}}" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>list Exams</p>
+                            </a>
+                        </li>
+
+
+                        @if(Auth::user()->hasRole('instructor'))
+                            <li class="nav-item">
+                                <a href="{{route('exams.create')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p> Add Exam </p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+                        @endif
+
+
                   </ul>
     </nav>
     <!-- /.sidebar-menu -->
