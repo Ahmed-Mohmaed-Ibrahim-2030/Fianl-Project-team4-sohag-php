@@ -150,3 +150,7 @@ Route::post('storeQuestion/{exam}',[App\Http\Controllers\ExamController::class,'
 Route::delete('question/{exam}',[App\Http\Controllers\ExamController::class,'destroyQuestion'])->name('question.destroy')->middleware('auth');
 
 Route::post('questionsCount',[\App\Http\Controllers\ExamController::class,'questionsCount'])->name('questionsCount');
+
+Route::get('/contact-form', [App\Http\Controllers\Api\ContactUsFormController::class, 'contactForm'])->name('contact-form')->middleware('auth');
+//Route::get('stripe', [StripePaymentController::class,'stripe']);
+//Route::post('stripe', [StripePaymentController::class,'stripePost'])->name('stripe.post');

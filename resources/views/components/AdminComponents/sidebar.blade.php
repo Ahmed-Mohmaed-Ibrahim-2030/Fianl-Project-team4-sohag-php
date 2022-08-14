@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
         <img src="{{asset('assets/dist/img/logo/logo.jfif')}}" alt="E-L-Platform Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">E-L-Platform</span>
+        <span class="brand-text font-weight-light">E-Education </span>
     </a>
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
@@ -140,7 +140,8 @@
                     </ul>
                 </li>
                         @endif
-            @if(Auth::user()->hasPermission('courses-read'))
+
+            @if(Auth::user()->hasRole('admin'))
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -171,7 +172,29 @@
                 </li>
                         @endif
 
+            @if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('super_admin'))
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Contact Us
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
 
+                        <li class="nav-item">
+                            <a href="{{route('contact-form')}}" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Contacts</p>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
+            @endif
                   </ul>
     </nav>
     <!-- /.sidebar-menu -->

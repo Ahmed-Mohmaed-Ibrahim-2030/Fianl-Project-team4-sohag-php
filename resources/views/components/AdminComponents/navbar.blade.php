@@ -97,32 +97,38 @@
         </li>
         <!-- Notifications Dropdown Menu -->
 
-        <li class="nav-item dropdown">
+        <ul class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <span class="badge badge-warning navbar-badge">{{Auth::User()->unreadNotifications->count()}}</span>
             </a>
+
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-        </li>
+                <span class="dropdown-item dropdown-header">{{Auth::User()->unreadNotifications->count()}} Notifications</span>
+                <hr>
+                <li class="notification-box">
+                    @foreach(Auth::User()->unreadNotifications as $notification)
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-3 ">
+                                <img src="{{Auth::user()->image}}" class="w-50 rounded-circle">
+                            </div>
+                            <div class="col-lg-8 col-sm-8 col-8">
+                                <strong class="text-info">{{$notification->data['$created_by']}}</strong>
+                            </div>
+                        </div>
+                        <div class="row text-end ">
+                            <div class="col text-center"> <a href="{{route('course.show',$notification->data['course_id'])}}">{{$notification->data['$name']}}</a></div>
+                        </div>
+                        <div class="row text-center">
+                            <small class="col text-center text-warning">{{$notification->created_at}}</small>
+                        </div>
+                </li>
+                <hr>
+                @endforeach
+
+            </diV>
+        </ul>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>

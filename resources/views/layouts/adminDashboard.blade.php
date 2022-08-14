@@ -80,7 +80,7 @@
         </section>
     </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; by team 4 <a href="https://adminlte.io">E-L-Platform </a>.</strong>
+        <strong>Copyright &copy; by team 4 <a href="https://adminlte.io">E-Education </a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0

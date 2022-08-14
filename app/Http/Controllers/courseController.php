@@ -15,9 +15,13 @@ use App\Models\Course;
 
 
 use App\Models\Sub_Category;
+use App\Models\User;
+use App\Notifications\CreateCourse;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 
 class courseController extends Controller
@@ -94,7 +98,15 @@ $request_data=$request->except('image' ,"_token");
 
         }
 //        dd($request_data);
-        Course::create($request_data);
+        $course=Course::create($request_data);
+        $user=User::where('id','!=',Auth::id())->get();
+        // dd($course->id);
+        // Notification::send($user , new CreateCourse($course->id));
+        $created_by=Auth::user()->first_name;
+        Notification::send($user , new CreateCourse($course->id,$created_by,$course->name));
+        // return redirect()->route('/courses/create');
+
+//        return redirect()->route('allcourses');
         return redirect()->route('allcourses');
         //
     }
@@ -107,9 +119,11 @@ $request_data=$request->except('image' ,"_token");
      */
     public function show($id)
     {
-        //
+        $course=Course::findorFail($id);
+        $getId= DB::table('notifications')->where('data->course_id',$id)->pluck('id');
+        DB::table('notifications')->where('id',$getId)->update(['read_at'=>now()]);
+        return $course;
     }
-
     /**
      * Show the form for editing the specified resource.
      *

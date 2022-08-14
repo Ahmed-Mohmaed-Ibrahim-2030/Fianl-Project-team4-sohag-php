@@ -27,7 +27,7 @@ class ContactUsFormController extends Controller
         //  Store data in database
         Contact::create($request->all());
         // // Send mail to admin
-        // \Mail::raw( 
+        // \Mail::raw(
         //     ('name'. ":". $request->get('name').",".
         //     // 'email'. ":". $request->get('email').",".
         //     'phone'. ":". $request->get('phone').",".
@@ -42,5 +42,9 @@ class ContactUsFormController extends Controller
             'stautus'=>true,
             'message'=>'We have received your message and would like to thank you for writing to us.',
         ],201);
+    }
+    public function contactForm(){
+        $contacts=Contact::all();
+        return view('AdminDashboard.contacts',compact('contacts'));
     }
 }
