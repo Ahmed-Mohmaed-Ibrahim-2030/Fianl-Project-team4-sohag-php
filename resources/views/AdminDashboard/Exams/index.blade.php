@@ -78,7 +78,7 @@ List Exams
                 {!! $exams->withQueryString()->links('pagination::bootstrap-5') !!}
             @else
                 <h2>
-                    No Users Founded
+                    No Exams Founded
                 </h2>
             @endif
         </div>

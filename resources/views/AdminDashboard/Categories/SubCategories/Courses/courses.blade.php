@@ -18,7 +18,7 @@
                 <div class="col-md-4">
 
                     <button type="submit" class="btn btn-outline-info btn-sm  {{Auth::user()->hasPermission('courses-read')?'':'disabled'}}"><i class="fa fa-search"></i> Find</button>
-                    <a href="{{ route('create.course')}}" class="btn btn-outline-primary btn-sm  {{Auth::user()->hasPermission('courses-create')?'':'disabled'}}"><i class="fa fa-plus"></i> Add</a>
+                    <a href="{{ route('create.course')}}" class="btn btn-outline-primary btn-sm  {{Auth::user()->hasRole('instructor')?'':'disabled'}}"><i class="fa fa-plus"></i> Add</a>
                 </div>
             </div>
         </div>

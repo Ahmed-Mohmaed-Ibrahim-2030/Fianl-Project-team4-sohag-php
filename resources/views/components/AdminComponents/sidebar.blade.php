@@ -141,7 +141,7 @@
                 </li>
                         @endif
 
-            @if(Auth::user()->hasRole('admin'))
+            @if(Auth::user()->hasPermission('courses-update'))
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

@@ -107,7 +107,7 @@ $request_data=$request->except('image' ,"_token");
         // return redirect()->route('/courses/create');
 
 //        return redirect()->route('allcourses');
-        return redirect()->route('allcourses');
+        return redirect()->route('UnreviewedCourses')->with('success','course added successfully but still not reviewd by admins');
         //
     }
 
@@ -178,6 +178,6 @@ Admin_Course::create([    'admin_id'=>Auth::user()->admin->id,
 $course->update([
     'reviewed'=>true
 ]);
-return redirect()->route('UnreviewedCourses');
+return redirect()->route('allcourses')->with('success','course  successfully  reviewd by admins');
 }
 }
